@@ -1,0 +1,18 @@
+//query params
+    /**
+     * outra forma de fazer abaixo
+           --const {name, age} = request.query
+     */
+    // const name = request.query.name   
+    // const age = request.query.age
+    //console.log(name,age)
+
+    //route params
+    // colocar isso no get: /users/:id
+    // const { id } = request.params
+    // console.log(id)
+
+    //body params
+    //const {name, age} = request.body
+    //return response.json({ name, age }) //colocar name: name por ex só quanto a variavel é igual à chave
+    //crtl + n pare abrir um "new request"
