@@ -1,9 +1,11 @@
 const express = require('express')
 const uuid = require('uuid')
+const cors = require('cors')
 
-const port = 3000
+const port = 3001
 const server = express()
 server.use(express.json())
+server.use(cors())
 
 const users = []
 
@@ -27,10 +29,18 @@ server.get('/users', (request, response) => {
 })
 
 server.post('/users', (request, response) => {
+try {
     const { name, age } = request.body
+    if(age < 18) throw new Error("Age must be over 18")
     const user = { id: uuid.v4(), name, age}
     users.push(user)
-    return response.status(201).json(user)
+    return response.status(201).json(user) 
+} catch (err) {
+    return response.status(400).json({error: err.message})
+} finally{
+    console.log("All done")
+}
+    
 })
 
 server.put('/users/:id', checkUserId, (request, response) => {
